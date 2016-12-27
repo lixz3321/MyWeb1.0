@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- 该配置文件为spring的配置文件，可以配置springMVC，默认放在/WEB-INF/路径下，名字为:"web.xml的servlet映射名"+"-servlet" -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+                                                                                	
+	 <context:component-scan base-package="com"/> 
+	<!-- <context:component-scan base-package="com.Controller"/>  -->
+	 <!-- 启用spring mvc 注解-->  
+    <mvc:annotation-driven>   
+    </mvc:annotation-driven>
+	
+	
+    <!-- 以下为springMVC的三大组件，首先要配置上这个 -->
+    
+    <!-- 组件1：HandlerMapping -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean><!-- 表示将请求的URL和Bean名字映射 -->
+    
+    <!-- 组件2：HandlerAdapter -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean><!-- 表示实现了该接口的Bean可以作为SpringMVC的处理器 -->
+    
+    <!-- 组件3：ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/><!-- 表示JSP模板页面需要使用JSTL标签库，classpath中必须包含jstl相关jar包 -->
+       <property name="prefix" value="/jsp/"/><!-- 查找视图页面的前缀 -->
+       <property name="suffix" value=".jsp"/><!-- 后缀 -->
+    </bean>
+    
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->  
+    <!-- <bean  
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <ref bean="mappingJacksonHttpMessageConverter" /> JSON转换器  
+            </list>  
+        </property>  
+    </bean>  -->
+    
+</beans>

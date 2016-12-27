@@ -1,0 +1,39 @@
+body{
+	margin:0;
+	padding:0;
+	background:url(../images/login_bg.png) no-repeat 0px -370px;
+	background-size:100% 1200px;
+	position:relative;
+}
+form{
+	position:absolute;
+	top:200px;
+	right:130px;
+	
+	color:#000;
+	font-size:17px;
+	font-weigth:700;
+	font-family:\5FAE\8F6F\96C5\9ED1;
+}
+.login_input{
+	margin:0 0 20px 0;
+	width:170px;
+	height:30px;
+	border-radius:10px; /*Ô²½Ç*/
+}
+.login_btn{
+    margin:0 20px 20px 0;
+	width:70px;
+	height:30px;
+	border-radius:1px; /*Ô²½Ç*/
+	background:url(../images/top_menu_bg.png) no-repeat -5px -5px;
+}
+.login_btn_div{
+	margin:0 0px 0 50px;
+}
+.login_btn_div input{
+	color:#000;
+	font-size:14px;
+	font-weigth:500;
+	font-family:\5FAE\8F6F\96C5\9ED1;
+}
