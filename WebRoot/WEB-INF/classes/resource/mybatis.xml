@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ 
+     <typeAliases> <!-- 定义实体类的别名（也可以说返回类型的别名） -->
+      <typeAlias type="com.entity.sys_User" alias="sys_User"></typeAlias>
+      <typeAlias type="com.entity.User" alias="User"></typeAlias>
+     </typeAliases>
+     
+     <mappers>
+       <!-- mapper.xml已经在spring-mybatis里配置了 -->
+       <!--  <mapper resource="resource/mapper/Mapper.xml"/>注意加载路径 加上Resource包名 -->
+     </mappers>
+</configuration>
