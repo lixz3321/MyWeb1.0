@@ -19,14 +19,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<link rel="stylesheet" type="text/css" href="web-resource/jquery-easyui/themes/default/easyui.css">  
+    <link rel="stylesheet" type="text/css" href="web-resource/jquery-easyui/themes/icon.css"> 
     <link rel="stylesheet" type="text/css" href="css/login.css"></link>
     <script charset="gb2312" src="web-resource/jquery-easyui/jquery.min.js"></script> 
+    <script type="text/javascript" src="web-resource/jquery-easyui/jquery.easyui.min.js"></script> 
     <script charset="gb2312" type="text/javascript" src="js/login.js"></script>
   </head>
   
   <body>
     <form action="login/test4">
-     账户：<input class="login_input" type="text" name="name" value='${user.name}'><br>
+     账户：<input class="login_input" type="text" name="name" value='${message}'><br>
      密码：<input class="login_input" type="password" name="pass" value='${user.password}'><br>
      <div class="login_btn_div">
      <input id="login" class="login_btn" type="button" value="登陆">

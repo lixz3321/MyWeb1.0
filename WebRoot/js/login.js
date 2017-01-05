@@ -1,9 +1,7 @@
 $(function(){
 	var param={};	
-	//登出回显用户
-	//$('#name').val($('#name', parent.document).val());
 	
-	//手动登陆
+	//登陆
 	$('#login').click(function(){
 		var name=$("input[name='name']").val();
 		var pass=$("input[name='pass']").val();
@@ -17,11 +15,12 @@ $(function(){
 			data:param,
 			dataType: 'json',
 			success:function(data){
-				//state: 1用户验证成功，0验证失败
+				
+				//state: 1用户登陆成功，0登陆失败
 				if(data['state']=='1'){
-					//显示菜单栏
+					//框架显示菜单栏
 					$('.menu', parent.document).show();
-					//显示用户名及编辑按钮
+					//显示用户名及系统按钮
 					$('.sys_name', parent.document).show();
 					$('.sys_btn', parent.document).show();
 					//判断角色
@@ -31,20 +30,16 @@ $(function(){
 					}else if(data['role']['leval']=='2'){
 						$('#menu1',parent.document).show();
 					}else{
-						alert("角色判断失败");
+						alert("角色验证失败");
 						alert($('#role_leval',parent.document).val());
+						location.reload();
 					}
-				
-				//$('#menu1', parent.document).hide(); //隐藏父窗口菜单按钮
-				
 				
 				//转到数据统计jsp
 				$('#iframe', parent.document).attr('src','jsp/dataCont.jsp');
 				}else{
-					$('#iframe', parent.document).attr('src','jsp/login.jsp');
-					alert("账户有误");
+					$.messager.alert('提示','用户名或密码错误！'); 
 				}
-				
 			},
 			error:function(){
 				alert('ajax error');

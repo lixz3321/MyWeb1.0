@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <div class="banner">
    <div class="sysName">电网机组运行状态实时监测平台<br><p>author:李新兆<p></div>
-   <div class="menu" style="display: ">
+   <div class="menu" style="display: none">
     <ul>
      <li>数据统计<div></div></li>
      <li>排放预警<div></div></li>

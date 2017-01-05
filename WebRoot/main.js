@@ -1,13 +1,14 @@
 $(function(){
-    //隐藏菜单栏（无会话状态下）
-	if($('#name').val()==''){
-		$('.menu').hide(); 
-	}
+	
 	//刷新重定向
 	if($('#crrent_iframe_url').val()!=''){
 		var iurl=$('#crrent_iframe_url').val();
 		var rolel=$('#role_leval').val();
+		//框架加载刷新前的url
 		$('#iframe').attr('src',iurl);
+		//显示主菜单
+		$('.menu').show();
+		
 		//判断用户角色
 		if(rolel==1){
 			$('#menu1').show();
@@ -17,10 +18,6 @@ $(function(){
 			$('#menu1').show();
 			$('.sys_btn').show();
 		}
-		
-		
-		//在此添加模拟点击登陆事件调用手工登陆
-		
 	}
 	
 	$('.menu>ul>li>div').addClass('menu_noClick');//未点击的菜单亮条样式
@@ -29,15 +26,14 @@ $(function(){
     
 	//点击菜单
 	$('.menu>ul>li').click(function(){
-		//控制菜单亮条样式
-		$('.menu>ul>li>div').removeClass('menu_click');//移除menu_click样式，只有添加了改样式的div受影响
+		//菜单亮条都变暗
+		$('.menu>ul>li>div').removeClass('menu_click');//移除menu_click样式，只有添加了该样式的div受影响
 		//$(this).children().addClass('menu_click');//$(this)可获取当前触发事件对象，children()获取第一个子元素
 		
 	     //控制ifram加载url
 		var $li=$('.menu>ul').find('li');
 		if($(this)[0]==$li[0]){    //需将this转为js对象
 		   $('#iframe').attr('src','jsp/dataCont.jsp');
-		
 		}else if($(this)[0]==$li[1]){
 		   $('#iframe').attr('src','jsp/discharge.jsp');
 		 //把该页面的url存入会话，以便刷新重定向
@@ -48,7 +44,6 @@ $(function(){
 			});
 		}else if($(this)[0]==$li[2]){
 		   $('#iframe').attr('src','jsp/pss.jsp');
-		 //把该页面的url存入会话，以便刷新重定向
 		   $.ajax({
 				type:'post',
 				url:'Common/addUrl2Session',
@@ -56,7 +51,6 @@ $(function(){
 			});
 		}else if($(this)[0]==$li[3]){
 			$('#iframe').attr('src','jsp/equipment.jsp');
-			//把该页面的url存入会话，以便刷新重定向
 			   $.ajax({
 					type:'post',
 					url:'Common/addUrl2Session',
@@ -64,7 +58,6 @@ $(function(){
 				});
 		}else if($(this)[0]==$li[4]){
 			$('#iframe').attr('src','jsp/sysManager.jsp');
-			//把该页面的url存入会话，以便刷新重定向
 			   $.ajax({
 					type:'post',
 					url:'Common/addUrl2Session',
@@ -72,7 +65,6 @@ $(function(){
 				});
 		}else if($(this)[0]==$li[5]){
 			$('#iframe').attr('src','jsp/limitManager.jsp');
-			//把该页面的url存入会话，以便刷新重定向
 			   $.ajax({
 					type:'post',
 					url:'Common/addUrl2Session',
@@ -90,20 +82,8 @@ $(function(){
 		    url:'Login/exit',
 		    data:'',
 		    success:function(data){
-		    	//菜单亮条变暗
-		    	$('.menu>ul>li>div').addClass('menu_noClick');
-		    	$('.menu>ul>li>div').removeClass('menu_click');
-		    	//隐藏菜单栏
-				$('.menu', parent.document).hide();
-				//清空用户名
-				$('.sys_name')[0].innerHTML="";
-				//切换到登陆页面
-				$('#iframe').attr('src','jsp/login.jsp');
-				//清空隐藏域会话信息
-				$('crrent_iframe_url').val('');
-				$('role_leval').val('');
-				$('name').val('');
-				$('password').val('');
+		    	//重新加载页面
+		    	location.reload();
 		    },
 		});
 		
