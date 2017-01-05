@@ -3,13 +3,12 @@ $(function(){
 	var url_all=document.URL;
 	var index=url_all.indexOf('1.0/');
 	var url=url_all.substr(index+4);
-	alert(url);
 	$.ajax({
 		type:'post',
 		url:'Common/addUrl2Session',
-		data:url,
+		data:{crrent_iframe_url:url},
 		error:function(){
-			alert("ª·ª∞±£¥Êurl ß∞‹");
+			alert("dataCont.js:  "+"session save url error");
 		}
 	});
 	

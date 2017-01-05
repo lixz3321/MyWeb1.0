@@ -46,11 +46,12 @@ public class login {
 	 //退出登陆
 	 @RequestMapping("/exit")
 	 @ResponseBody
- public sys_User login2(HttpSession session) throws Exception{
+ public sys_User exit(HttpSession session) throws Exception{
 		 //退出前，用户回显到登陆页
 		 sys_User user=(sys_User) session.getAttribute("user");
-		 //从会话中移除用户
+		 //清空会话
 		 session.removeAttribute("user");
+		 session.removeAttribute("crrent_iframe_url");
 		 return user;
  }
 	 @RequestMapping("/login3")

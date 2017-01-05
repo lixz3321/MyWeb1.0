@@ -16,17 +16,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script charset="gb2312"src="main.js"></script>
   </head>
  <body>  
-  <input id="url" type="hidden" value="${url}">
+  <!-- 用户权限信息 -->
+  <input id="crrent_iframe_url" type="hidden" value="${crrent_iframe_url}">
+  <input id="role_leval" type="hidden" value="${role.leval}">
+  <input id="name" type="hidden" value="${user.name}">
+  <input id="password" type="hidden" value="${user.password}">
+  
   <div class="banner">
    <div class="sysName">电网机组运行状态实时监测平台<br><p>author:李新兆<p></div>
-   <div class="menu" style="display: none">
+   <div class="menu" style="display: ">
     <ul>
      <li>数据统计<div></div></li>
      <li>排放预警<div></div></li>
      <li>励磁系统<div></div></li>
      <li>设备运维<div></div></li>
-     <li id="menu1">系统管理<div id="lt"></div></li>
-     <li id="menu2">权限管理<div></div></li>
+     <li id="menu1" style="display: none">系统管理<div id="lt"></div></li>
+     <li id="menu2" style="display: none">权限管理<div></div></li>
     </ul>
    </div>
    <div class="sys_name">${user.name}</div><!-- 会话 -->
