@@ -1,5 +1,6 @@
 $(function(){
 	var param={};	
+	 
 	
 	//µÇÂ½
 	$('#login').click(function(){
