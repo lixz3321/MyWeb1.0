@@ -42,7 +42,7 @@ $(function(){
 				}
 			},
 			error:function(){
-				alert('ajax error');
+				$.messager.alert('Ã· æ','ajax¥ÌŒÛ£°');
 			}
 		});
 	});
