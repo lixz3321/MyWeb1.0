@@ -1,7 +1,6 @@
 $(function(){
 	var param={};	
-	 
-	
+	 //this..
 	//µÇÂ½
 	$('#login').click(function(){
 		var name=$("input[name='name']").val();
