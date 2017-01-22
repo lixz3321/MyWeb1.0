@@ -54,6 +54,7 @@ public class login {
 		 session.removeAttribute("crrent_iframe_url");
 		 return user;
  }
+	 /*********≤‚ ‘≤ø∑÷*********/
 	 @RequestMapping("/login3")
 	 @ResponseBody
  public JSONObject login3(String name,String pass,HttpSession session) throws Exception{
@@ -61,9 +62,6 @@ public class login {
 		 System.out.println("controller    name:"+name+"  pass:"+pass);
 		 
 		 Map<String,Object> map=LoginService.validate(name, pass,session);
-		 
-		 
-		 
 		 
 		 List list=new ArrayList();
 		  list.add(1);

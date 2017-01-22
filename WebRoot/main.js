@@ -64,11 +64,11 @@ $(function(){
 					data:{crrent_iframe_url:'jsp/sysManager.jsp'},
 				});
 		}else if($(this)[0]==$li[5]){
-			$('#iframe').attr('src','jsp/limitManager.jsp');
+			$('#iframe').attr('src','jsp/PermManager.jsp');
 			   $.ajax({
 					type:'post',
 					url:'Common/addUrl2Session',
-					data:{crrent_iframe_url:'jsp/limitManager.jsp'},
+					data:{crrent_iframe_url:'jsp/PermManager.jsp'},
 				});
 		}
 	});
@@ -88,5 +88,42 @@ $(function(){
 		});
 		
 	});
-		
+	//初始化修改密码弹窗
+	$('#dd').dialog({   
+	    title: '修改密码',   
+	    width: 300,   
+	    height: 200,   
+	    closed: true,   
+	    cache: false,   
+	    modal: true, 
+	    buttons:[{text:'保存',
+			      iconCls:'icon-save',
+			      handler:function(){
+			    	  if($('#v1').val()==$('#password').val()){
+			    		  if($('#v2').val()==$('#v3').val()){
+			    			  $.ajax({
+			    					type:'post',
+			    					url:'PermManage/modifyPass',
+			    					data:{id:$('#id').val(),newPass:$('#v3').val()},
+			    					success:function(){
+			    						//修改隐藏域的密码为新密码
+			    						$('#password').val($('#v3').val());
+			    						$('#dd').dialog('close');
+			    						$.messager.alert('提示','密码修改成功'); 
+			    					},
+			    				});
+			    		  }else{
+			    			  $.messager.alert('提示','两次密码输入不正确');  
+			    		  }
+			    	  }else{
+			    		  $.messager.alert('提示','原密码有误！'); 
+//			    		  alert($('#v1').val());
+//		    			  alert($('#password').val());
+			    	  }
+			      }
+	              }],
+	});
+	$('#sys_editor').click(function(){
+		$('#dd').dialog('open');
+	});
 });

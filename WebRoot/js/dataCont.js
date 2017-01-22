@@ -11,7 +11,9 @@ $(function(){
 			alert("dataCont.js:  "+"session save url error");
 		}
 	});
-	
+	//刷新父页面，使会话的登陆信息存入父页面的隐藏域
+//	alert("刷新");
+//	parent.location.reload();
 	//登陆后菜单栏显示用户名
 	$('.sys_name', parent.document)[0].innerHTML=$('#sys_name').val();
 	

@@ -1,0 +1,40 @@
+/*页面主体公共属性*/
+body{
+	margin:0;padding:0;
+	font-family:\5FAE\8F6F\96C5\9ED1;/*wei ruan ya hei*/
+	}
+form,ul,li{list-style:none;margin:0;padding:0;}
+a{text-decoration:none; color:#666;}
+/*框架*/
+.content{
+	width:100%;
+	height:559px;   /* 高度不可改动 */
+}
+.small_iframe{
+    position:absolute;
+	left:236px;
+}
+/*左侧导航栏*/
+.leftbox{
+	width:236px;
+	height:600px;
+	position:absolute;
+	left:0;
+	background: linear-gradient(to right, #00706b , #07ad99);
+}
+.leftbox .ss{
+background:url(../images2/left_bg.png) no-repeat; position:absolute; top:14px; right:7px; width:18px; height:18px; cursor:pointer; z-index:2000;
+}
+.leftbox .leftbox_title{
+	height:45px; line-height:45px; font-size:16px; color:#fff; padding-left:20px; background:url(../images/leftbox_title_bg_x.png) repeat-y;
+}
+.leftbox .leftbox_title i{
+	display:inline-block; width:18px; height:14px; background:url(../images/leftbox_title_i_bg.png) no-repeat; margin-right:6px;
+}
+.leftmenu{margin-top:12px; position:absolute; width:95%; left:10px;}
+.leftmenu span{zoom:1; font-weight:bold; color:#08635e; position:relative; left:0;}
+.leftmenu ul li{height:39px; line-height:39px; padding-left:26px;}
+.leftmenu ul li:hover{background:rgba(0,0,0,0.1);}
+.leftmenu ul li a{font-size:15px; color:#fff;}
+.leftmenu ul li a i{display:inline-block; width:16px; height:16px; background:url(../images2/icon1.png) no-repeat; float:left;}
+.leftmenu ul li a i.i9{background-position:-16px 0px; margin:11.5px 6px 0px 0px;}

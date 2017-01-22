@@ -110,11 +110,7 @@ body,div,ul,li{margin:0;padding:0;}/*设置全局元素*/
 .menu_click{
 	background:#99FF00;
 }
-/*内容*/
-.content{
-	width:100%;
-	height:559px;   /* 高度不可改动 */
-}
+
 /* .menu_disable{
 	color:rgba(100,100,100,0.5);
 	cursor:default;

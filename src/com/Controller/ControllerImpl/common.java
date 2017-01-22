@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/Common")
 public class common {
 	
+  //刷新重定向将刷新前的框架url保存到会话
   @RequestMapping("/addUrl2Session")
   @ResponseBody
   public void addUrl2Session(String crrent_iframe_url,HttpSession session){

@@ -23,12 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
-    <form action="Controller/addSysUser">
-    状态： <input name="state"type="text">
-     用户：<input name="name"type="text">
-     密码：<input name="pass"type="text">
-     <input name="button"type="submit">
-    </form>
+  ${message}
   </body>
 </html>

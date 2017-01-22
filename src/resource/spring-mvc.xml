@@ -10,10 +10,11 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd  
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
-                                                                                	
+      <!-- 扫描包 -->                                                                          	
 	 <context:component-scan base-package="com"/> 
-	<!-- <context:component-scan base-package="com.Controller"/>  -->
-	 <!-- 启用spring mvc 注解-->  
+	
+	 <!-- 启用spring mvc 注解     提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，
+	   @Valid支持，读写XML的支持（JAXB），读写JSON的支持（需要引入Jackson系列jar包）-->  
     <mvc:annotation-driven>   
     </mvc:annotation-driven>
 	

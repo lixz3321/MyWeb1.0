@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Dao.PermManageMapper">
+   
+   <select id="modifyPass" resultType="map">
+	  update sys_user set password = ${newPass} where id = ${id} 
+   </select>
+   
+   <select id="findUser" resultType="sys_User">
+	  select * from sys_user where 1=1
+	  <if test="name!=null and name != ''">
+	   and name like '%${name}%';
+	  </if>
+   </select>
+   
+   <select id="saveUser" resultType="map">
+   
+        <!-- 注意用#{} -->
+        declare @id int
+        begin
+        select @id=id from [lixz].[dbo].[sys_user] where id=#{user.id}
+        if @id is null
+           insert into [lixz].[dbo].[sys_user](name,password,state) values(#{user.name},#{user.password},#{user.state});
+        else
+           update [lixz].[dbo].[sys_user] set name=#{user.name} , password=#{user.password} , state=#{user.state} where id=#{user.id}
+        end;
+        
+        <!--  -->
+<!--               begin transaction  
+              declare @error int,@id int;
+              set @error=0; 
+              select @id=id from [lixz].[dbo].[sys_user] where id=#{user.id};
+              begin try 
+                if @id is null
+                   insert into [lixz].[dbo].[sys_user](name,password,state) values(#{user.name},#{user.password},#{user.state});
+                   insert into [lixz].[dbo].[sys_user_role](name,password,state) values(#{user.name},#{user.password},#{user.state});
+                else
+                   update [lixz].[dbo].[sys_user] set name=#{user.name} , password=#{user.password} , state=#{user.state} where id=#{user.id}
+              end try 
+              begin catch 
+                 set @error=1
+              end catch 
+              if(@error=1)
+                begin
+                   rollback transaction
+                end
+              else
+                begin
+                   commit transaction
+                end
+         -->
+   </select>
+   <select id="delUser">
+        
+            begin transaction  
+              declare @error int;
+              set @error=0; 
+              begin try 
+                 delete from sys_user where id =#{user.id}
+                 delete from sys_user_role where user_id=#{user.id}
+              end try 
+              begin catch 
+                 set @error=1
+              end catch 
+              if(@error=1)
+                begin
+                   rollback transaction
+                end
+              else
+                begin
+                   commit transaction
+                end       
+   </select>
+    
+    <select id="findRole" resultType="map">
+       select * from sys_role where 1=1
+	     <if test="name!=null and name != ''">
+	       and name like '%${name}%';
+	     </if>
+    </select>
+    
+    <select id="saveRole" resultType="map">
+        declare @id int
+        begin
+        select @id=id from [lixz].[dbo].[sys_role] where id=#{role.id}
+        if @id is null
+           insert into [lixz].[dbo].[sys_role](name,leval) values(#{role.name},#{role.leval});
+        else
+           update [lixz].[dbo].[sys_role] set name=#{role.name} ,leval=#{role.leval} where id=#{role.id}
+        end;
+    </select>
+           
+    <select id="delRole" resultType="map">
+             begin transaction  
+              declare @error int;
+              set @error=0; 
+              begin try 
+                 delete from sys_role where id =#{id}
+                 delete from sys_user_role where role_id=#{id}
+              end try 
+              begin catch 
+                 set @error=1
+              end catch 
+              if(@error=1)
+                begin
+                   rollback transaction
+                end
+              else
+                begin
+                   commit transaction
+                end  
+
+    </select>
+    
+    <select id="findRoleConn" resultType="map">
+            SELECT ur.id,u.id user_id,u.name uName,r.name rName,r.leval from sys_user u
+            LEFT JOIN sys_user_role ur on u.id=ur.user_id
+            LEFT JOIN sys_role r on ur.role_id=r.id
+            where 1=1
+            <if test="uName != null and uName != ''">
+            and u.name like '%${uName}%'
+            </if>
+            <if test="rName != null and rName != ''">
+            and r.name like '%${rName}%'
+            </if>
+            ; 
+    </select>
+    
+    <select id="saveRoleConn" resultType="map">
+            <!-- begin transation
+            declear @error int,@id int
+            set @error=0
+            select @id=id from sys_user_role where id=#{map.id}
+            
+            begin try
+               if @id is null
+                  begin 
+                     insert into sys_user_role(user_id,role_id) values(#{map.user_id},#{map.role_id});
+                     update sys_user set state = 1 where id=#{map.user_id}
+                  end
+               else
+                  begin
+                     update sys_user_role set user_id=#{map.user_id},role_id=#{map.role_id} where id=#{map.id}
+                  end
+            end try
+            
+            begin catch
+              set @error=1
+            end catch
+             
+            if(@error=1)
+                begin
+                   rollback transaction
+                end
+            else
+                begin
+                   commit transaction
+                end  --> 
+                
+                
+                
+            begin transaction 
+            declare @error int,@id int
+            set @error=0
+            select @id=id from sys_user_role where id=#{map.id}
+            
+            begin try
+               if @id is null
+                  begin 
+                     insert into sys_user_role(user_id,role_id) values(#{map.user_id},#{map.role_id});
+                     update sys_user set state = 1 where id=#{map.user_id}
+                  end
+               else
+                  begin
+                     update sys_user_role set user_id=#{map.user_id},role_id=#{map.role_id} where id=#{map.id}
+                  end
+            end try
+            
+            begin catch
+              set @error=1
+            end catch
+             
+            if(@error=1)
+                begin
+                   rollback transaction
+                end
+            else
+                begin
+                   commit transaction
+                end 
+    </select>
+    
+    <select id="delRoleConn" resultType="map">
+           begin transaction
+           declare @error int
+           set @error=0
+           begin try
+             update [lixz].[dbo].[sys_user] set state=0 where id=(select user_id from [lixz].[dbo].[sys_user_role] where id=#{id});
+             delete from [lixz].[dbo].[sys_user_role] where id=#{id};        
+           end try
+           begin catch
+             set @error=1;
+           end catch
+           if (@error=1)
+             begin
+             rollback transaction;
+             end
+           else
+             begin
+             commit transaction;
+             end   
+    </select>
+</mapper>

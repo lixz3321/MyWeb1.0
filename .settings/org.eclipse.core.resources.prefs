@@ -1,5 +1,12 @@
 eclipse.preferences.version=1
 encoding//WebRoot/css/main.css=UTF-8
+encoding//WebRoot/js/roleConn.js=UTF-8
+encoding//WebRoot/js/roleManager.js=UTF-8
+encoding//WebRoot/js/userManager.js=UTF-8
 encoding//WebRoot/jsp/dataCont.jsp=UTF-8
 encoding//WebRoot/jsp/login.jsp=UTF-8
+encoding//WebRoot/jsp/roleManager.jsp=UTF-8
 encoding//WebRoot/jsp/test.jsp=UTF-8
+encoding//WebRoot/jsp/userManager.jsp=UTF-8
+encoding//WebRoot/web-resource/jquery-easyui=UTF-8
+encoding//WebRoot/web-resource/jquery-easyui/locale/easyui-lang-cz.js=UTF-8

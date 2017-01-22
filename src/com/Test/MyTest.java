@@ -19,12 +19,12 @@ public class MyTest {
 		ApplicationContext context=new ClassPathXmlApplicationContext("resource/spring-mybatis.xml");
 		service service=(com.Service.service) context.getBean("service");	
 		
-       User user=service.getUser(7);//id为2的为空
-       if(user==null){
-    	   System.out.print("user为空！");
-       }
-       else{
-    	   System.out.print(user.getName()); 
-       }
+//       User user=service.getUser(7);
+//       if(user==null){
+//    	   System.out.print("user为空！");
+//       }
+//       else{
+//    	   System.out.print(user.getName()); 
+//       }
 	}
 }

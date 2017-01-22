@@ -9,6 +9,17 @@
       <result property="age" column="age"/>
     </resultMap> -->
      
+     
+     
+      <!-- 测试 -->
+    <select id="getAllUser" resultType="User">
+	   select * from Users1;
+    </select>
+     
+     
+     
+     
+     
     <sql id="findYang"> <!-- 定义一个可重复引用的sql -->
       select id from Users1 where age &lt; 50
     </sql>
@@ -20,6 +31,9 @@
 	<select id="getUser" resultType="User">
 	   select * from Users1 where id=#{id}
     </select>
+    
+   
+  
     <insert id="addUser">
        insert into sys_user(name,password,state) values(#{name},#{pass},#{state});<!-- 不要使用user.name，user.age -->
     </insert>

@@ -19,48 +19,28 @@ import com.entity.sys_User;
 @Controller
 @RequestMapping("/Controller")
 public class controller{
+	
+
 	@Resource
 	service service;   //注入service （按bean名称匹配）
-
- @RequestMapping("/test1")
+	
+	/*******  测试   ********/	
+ @RequestMapping("/test")
  @ResponseBody
 	public ModelAndView test(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 	    if(service!=null){
 		  System.out.println("获得service");
+		  ModelAndView mv=new ModelAndView();
+			mv.addObject("message","success!!!");
+			mv.setViewName("index");
+			return mv;
 	    }else{
 		  System.out.print("service为空");
 		  return null;
 	    }
-	    
-	    User user=service.getUser(7);//id为2的为空
-	    String name=user.getName();
-	    
-	     if(user==null){
-	  	   System.out.print("user为空！");
-	  	 return null;
-	     }
-	     else{
-	  	   System.out.print(user.getName()); 
-	     }
-	     
-	     ModelAndView mv=new ModelAndView();
-			mv.addObject("message",name);
-			mv.setViewName("login");
-		return mv;
 	}
- @RequestMapping("/formTest")
- @ResponseBody
- public ModelAndView formTest(String id,String name,String age) throws Exception {
-	 System.out.print("name:"+name);
-	return null;
- }
+ /*******************/	
  
- @RequestMapping("/addSysUser")
- @ResponseBody
- public ModelAndView addUser(sys_User sys_User) throws Exception {
-	 System.out.print("cotroller name:"+sys_User.getName());
-	 service.addUser(sys_User.getName(),sys_User.getPassword(), sys_User.getState());
-	return null;
- }
+ 
 }

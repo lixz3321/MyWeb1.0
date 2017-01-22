@@ -23,6 +23,13 @@ $(function(){
 					//显示用户名及系统按钮
 					$('.sys_name', parent.document).show();
 					$('.sys_btn', parent.document).show();
+					
+					//登陆后将用户信息添加到父页面的隐藏域
+					$('#role_leval',parent.document).val(data['role']['role_leval']);
+					$('#id',parent.document).val(data['user']['id']);
+					$('#name',parent.document).val(data['user']['name']);
+					$('#password',parent.document).val(data['user']['password']);
+					
 					//判断角色
 					if(data['role']['leval']=='1'){
 						$('#menu1',parent.document).show();
@@ -37,8 +44,10 @@ $(function(){
 				
 				//转到数据统计jsp
 				$('#iframe', parent.document).attr('src','jsp/dataCont.jsp');
-				}else{
+				}else if(data['state']=='0'){
 					$.messager.alert('提示','用户名或密码错误！'); 
+				}else if(data['state']=='3'){
+					$.messager.alert('提示','该用户未激活！');
 				}
 			},
 			error:function(){
