@@ -1,6 +1,9 @@
 package com.Test;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.entity.User;
 import com.Service.service;
+import com.Service.ServiceImpl.SysManageServImpl;
 
 public class MyTest {
 
@@ -17,14 +21,9 @@ public class MyTest {
 	
 	public static void main(String agrs[]){
 		ApplicationContext context=new ClassPathXmlApplicationContext("resource/spring-mybatis.xml");
-		service service=(com.Service.service) context.getBean("service");	
-		
-//       User user=service.getUser(7);
-//       if(user==null){
-//    	   System.out.print("userÎª¿Õ£¡");
-//       }
-//       else{
-//    	   System.out.print(user.getName()); 
-//       }
+		SysManageServImpl service=(com.Service.ServiceImpl.SysManageServImpl) context.getBean("SysManageService");	
+        
+		List<Map> tree=service.findTree();
+		System.out.println(tree);
 	}
 }

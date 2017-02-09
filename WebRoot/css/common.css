@@ -31,7 +31,8 @@ background:url(../images2/left_bg.png) no-repeat; position:absolute; top:14px; r
 .leftbox .leftbox_title i{
 	display:inline-block; width:18px; height:14px; background:url(../images/leftbox_title_i_bg.png) no-repeat; margin-right:6px;
 }
-.leftmenu{margin-top:12px; position:absolute; width:95%; left:10px;}
+. {margin-top:12px; position:absolute; width:95%; left:10px;}
+ .leftmenu .clicked{background:rgba(0,0,0,0.1);}
 .leftmenu span{zoom:1; font-weight:bold; color:#08635e; position:relative; left:0;}
 .leftmenu ul li{height:39px; line-height:39px; padding-left:26px;}
 .leftmenu ul li:hover{background:rgba(0,0,0,0.1);}

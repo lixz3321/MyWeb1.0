@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.Dao.SysManageMapper">
-
-
-
-
-
+  <select id="findAll" resultType="map">
+     select * from [group];
+  </select>
+  <select id="findJtDc" resultType="map">
+     select * from [group] where 1=1
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
+     </if>
+     <if test="type!=null and type!=''">
+      and type=${type}
+     </if>
+     <if test="id!=null and id!=''">
+      and id=${id}
+     </if>
+     <if test="pid!=null and pid!=''">
+      and pid=${pid}
+     </if>
+  </select>
+  <select id="findJtDcJz" resultType="map">
+    select * from [group] where 1=1
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
+     </if>
+     <if test="type!=null and type!=''">
+      and type=${type}
+     </if>
+     <if test="id!=null and id!=''">
+      and id=${id}
+     </if>
+     <if test="pid!=null and pid!=''">
+      and pid=${pid}
+     </if>
+      UNION All
+    select * from [unit] where 1=1
+       
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
+     </if>
+     <if test="type!=null and type!=''">
+      and type=${type}
+     </if>
+     <if test="id!=null and id!=''">
+      and id=${id}
+     </if>
+     <if test="pid!=null and pid!=''">
+      and pid=${pid}
+     </if>
+  </select>
+  <select id="saveJtDcJz" resultType="map">
+     declare @id int,@type int
+     set @type=#{type}
+     if @type &lt; 3
+       begin
+         select @id=id from [group] where id=#{id}
+           if @id is null
+             insert into [group](name,pid,type,code) values(#{name},#{pid},#{type},#{code})
+           else
+             update [group] set name=#{name},pid=#{pid},type=#{type},code=#{code} where id=@id
+       end
+     else
+       begin
+          select @id=id from [unit] where id=#{id}
+          if @id is null
+             insert into [unit](name,pid,type,code) values(#{name},#{pid},#{type},#{code})
+          else
+             update [unit] set name=#{name},pid=#{pid},type=#{type},code=#{code} where id=@id
+       end;
+  </select>
+  <select id="delJtDcJz" resultType="map">
+      declare @type int
+        set @type=#{type}
+       if @type = 1
+         begin
+           delete from [group] where id=#{id}
+           delete from [group] where pid=#{id}
+         end
+       else if @type = 2
+         begin
+           delete from [group] where id=#{id}
+           delete from [unit] where pid=#{id}
+         end
+       else if @type = 3
+         begin
+           delete from [unit] where id=#{id}
+         end
+  </select>
+  <select id="findIndex" resultType="map">
+    select * from [index] where 1=1
+    <if test="name!=null and name!=''">
+      and name like '%#{name}%'
+    </if>
+  </select>
 </mapper>

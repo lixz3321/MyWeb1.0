@@ -116,6 +116,9 @@ $(function(){
    //删除
    $('#delete').click(function(){
 	   var row=$('#dg').datagrid('getSelections')[0];
+	   if(row==null){
+		   return;
+	   }
 	   $.ajax({
 		   type:'post',
 		   url:'PermManage/delUser',

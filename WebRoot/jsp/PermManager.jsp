@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="web-resource/jquery-easyui/jquery.easyui.min.js"></script>
     <!-- 公共 -->
     <script src="web-resource/jquery-easyui/jquery.min.js"></script> 
+    <script type="text/javascript"src="js/common.js"></script>
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <!-- 本模块 -->
     <script type="text/javascript"src="js/PermManager.js"></script>

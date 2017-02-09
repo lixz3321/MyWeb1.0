@@ -89,6 +89,9 @@ $(function(){
    //删除
    $('#delete').click(function(){
 	   var row=$('#dg').datagrid('getSelections')[0];
+	   if(row==null){
+		   return;
+	   }
 	   if(row['rName']!=null && row['rName']!=''){
 		   $.ajax({
 			   type:'post',
