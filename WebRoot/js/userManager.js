@@ -54,12 +54,6 @@ $(function(){
 				        }
 	                }},   
 	        {field:'state',title:'状态',width:100,align:'right',
-	           editor :{
-				  type:'textbox',
-				  options:{
-					  required: true
-				          }
-	                   },
 	           formatter: function(value,row,index){ 
 	    				if(value==1){
 	    					return '已激活';

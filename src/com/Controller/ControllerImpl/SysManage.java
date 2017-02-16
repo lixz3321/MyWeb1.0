@@ -43,12 +43,23 @@ public List<Map> findJtDcJz(String name,Integer id,Integer type,Integer pid){
 	List<Map> list=SysManageService.findJtDcJz(name, id, type, pid);
 	return list;
 }
-   
+ 
+@RequestMapping("/findIndex")
+@ResponseBody
+public List<Map> findIndex(String name){
+	List<Map> result=SysManageService.findIndex(name);
+	return result;
+ }
 
 @RequestMapping("/saveJtDcJz")
 @ResponseBody
 public void saveJtDcJz(String name,Integer id,Integer type,Integer pid,String code){
 	SysManageService.saveJtDcJz(name, id, type, pid, code);
+}
+@RequestMapping("/saveIndex")
+@ResponseBody
+public void saveIndex(Integer id,String name,String code){
+	SysManageService.saveIndex(id,name,code);
 }
 
 @RequestMapping("/delJtDcJz")
@@ -58,11 +69,12 @@ public void delJtDcJz(Integer id, String type) {
 	SysManageService.delJtDcJz(id, type);
 }
 
-@RequestMapping("/findIndex")
+@RequestMapping("/delIndex")
 @ResponseBody
-public List<Map> findIndex(String name){
-	List<Map> result=SysManageService.findIndex(name);
-	return result;
- }
+public void delIndex(Integer id, String type) {
+	// TODO Auto-generated method stub
+	SysManageService.delIndex(id);
+}
+
 
 }

@@ -20,7 +20,7 @@
         begin
         select @id=id from [lixz].[dbo].[sys_user] where id=#{user.id}
         if @id is null
-           insert into [lixz].[dbo].[sys_user](name,password,state) values(#{user.name},#{user.password},#{user.state});
+           insert into [lixz].[dbo].[sys_user](name,password,state) values(#{user.name},#{user.password},0);
         else
            update [lixz].[dbo].[sys_user] set name=#{user.name} , password=#{user.password} , state=#{user.state} where id=#{user.id}
         end;

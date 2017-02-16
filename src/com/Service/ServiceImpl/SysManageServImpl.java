@@ -1,6 +1,7 @@
 package com.Service.ServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.Dao.SysManageMapper;
 import com.Service.SysManageService;
+import com.util.DateUtil;
 
 @Service("SysManageService")
 public class SysManageServImpl implements SysManageService {
@@ -108,7 +110,19 @@ public void delJtDcJz(Integer id, String type) {
 public List<Map> findIndex(String name) {
 	// TODO Auto-generated method stub
 	List<Map> result=sysManageMapper.findIndex(name);
+	for(Map map:result){
+		String time=DateUtil.formatDate((Date)map.get("date"));
+		map.put("date",time);
+	}
 	return result;
+}
+public void saveIndex(Integer id,String name, String code) {
+	// TODO Auto-generated method stub
+	sysManageMapper.saveIndex(id,name,code);
+}
+public void delIndex(Integer id) {
+	// TODO Auto-generated method stub
+	sysManageMapper.delIndex(id);
 }
 
 }

@@ -49,6 +49,14 @@
       and pid=${pid}
      </if>
   </select>
+  <!-- 查询指标 -->
+  <select id="findIndex" resultType="map">
+    select * from [index] where 1=1
+    <if test="name!=null and name!=''">
+      and name like '%#{name}%'
+    </if>
+  </select>
+  <!-- 保存电厂机组 -->
   <select id="saveJtDcJz" resultType="map">
      declare @id int,@type int
      set @type=#{type}
@@ -69,6 +77,15 @@
              update [unit] set name=#{name},pid=#{pid},type=#{type},code=#{code} where id=@id
        end;
   </select>
+  <!-- 保存指标 -->
+  <select id="saveIndex" resultType="map">
+    declare @id int
+    select @id=#{id}
+    if @id is null
+             insert into [index](name,code) values(#{name},#{code})
+           else
+             update [index] set name=#{name},code=#{code} where id=@id
+  </select>
   <select id="delJtDcJz" resultType="map">
       declare @type int
         set @type=#{type}
@@ -87,10 +104,9 @@
            delete from [unit] where id=#{id}
          end
   </select>
-  <select id="findIndex" resultType="map">
-    select * from [index] where 1=1
-    <if test="name!=null and name!=''">
-      and name like '%#{name}%'
-    </if>
+  <!-- 删除指标 -->
+  <select id="delIndex" resultType="map">
+    delete from [index] where id=#{id}
   </select>
+  
 </mapper>

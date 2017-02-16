@@ -14,4 +14,6 @@ public interface SysManageMapper {
     public List<Map> findJtDc(@Param("name") String name,@Param("id") Integer id,@Param("type") Integer type,@Param("pid") Integer pid);
     public void  saveJtDcJz(@Param("name") String name,@Param("id") Integer id,@Param("type") Integer type,@Param("pid") Integer pid,@Param("code") String code);
     public void delJtDcJz(@Param("id") Integer id,@Param("type") String type);
+	public void saveIndex(@Param("id") Integer id,@Param("name") String name, @Param("code") String code);
+	public void delIndex(@Param("id") Integer id);
 }

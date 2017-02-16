@@ -14,4 +14,6 @@ public interface SysManageService {
 	public List<Map> findJtDcJz(String name,Integer id,Integer type,Integer pid);
 	public void  saveJtDcJz(String name,Integer id,Integer type,Integer pid,String code);
 	public void delJtDcJz(Integer id,String type);
+	public void saveIndex(Integer id,String name, String code);
+	public void delIndex(Integer id);
 }
