@@ -19,74 +19,109 @@
       and pid=${pid}
      </if>
   </select>
-  <select id="findJtDcJz" resultType="map">
-    select * from [group] where 1=1
-     <if test="name!=null and name != ''">
-      and name like '%${name}%' 
-     </if>
-     <if test="type!=null and type!=''">
-      and type=${type}
-     </if>
-     <if test="id!=null and id!=''">
-      and id=${id}
-     </if>
-     <if test="pid!=null and pid!=''">
-      and pid=${pid}
-     </if>
-      UNION All
-    select * from [unit] where 1=1
-       
-     <if test="name!=null and name != ''">
-      and name like '%${name}%' 
-     </if>
-     <if test="type!=null and type!=''">
-      and type=${type}
-     </if>
-     <if test="id!=null and id!=''">
-      and id=${id}
-     </if>
+  <!-- 查询机组 -->
+  <select id="findUnits" resultType="map">
+     select * from [unit] where 1=1
      <if test="pid!=null and pid!=''">
       and pid=${pid}
      </if>
   </select>
+  
+  <!-- 测点查询 -->
+  <select id="findTags" resultType="map">
+  
+  <!-- 电厂测点 -->
+  <if test="type == 2">
+    select t.name,t.code,t.unit,t.maxval,t.minval,t.createtime,tiu.id tiu_id,t.type
+    from tags t,[group] g,[index] i,tag_index_unit tiu
+    where t.id=tiu.tag_id and i.id=tiu.index_id and  g.id=tiu.group_id 
+     <if test="group_id!=null and group_id!=''">
+      and group_id=${group_id}
+     </if>
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
+     </if>
+  </if>
+  <!-- 机组测点 -->
+  <if test="type == 3">
+    select u.name,t.name,t.code,t.unit,t.maxval,t.minval,t.createtime,tiu.id tiu_id,t.type
+    from tags t,unit u,[index] i,tag_index_unit tiu
+    where t.id=tiu.tag_id and i.id=tiu.index_id and u.id=tiu.unit_id 
+    <if test="unit_id!=null and unit_id!=''">
+      and unit_id=${unit_id}
+     </if>
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
+     </if>
+  </if>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   <!--  select * from [tags] where 1=1
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
+     </if>
+     <if test="unit_id!=null and unit_id!=''">
+      and unit_id=${unit_id}
+     </if>
+     <if test="group_id!=null and group_id!=''">
+      and group_id=${group_id}
+     </if>
+     <if test="type!=null and type!=''">
+      and type=${type}
+     </if> -->
+  </select>
+  
   <!-- 查询指标 -->
   <select id="findIndex" resultType="map">
     select * from [index] where 1=1
     <if test="name!=null and name!=''">
-      and name like '%#{name}%'
+      and name like '%${name}%'
     </if>
   </select>
-  <!-- 保存电厂机组 -->
-  <select id="saveJtDcJz" resultType="map">
-     declare @id int,@type int
-     set @type=#{type}
-     if @type &lt; 3
-       begin
+  <!-- 保存集团电厂 -->
+  <select id="saveJtDc" resultType="map">
+    declare @id int
+    begin
          select @id=id from [group] where id=#{id}
            if @id is null
-             insert into [group](name,pid,type,code) values(#{name},#{pid},#{type},#{code})
+             insert into [group](name, type, pid, code, propertise, tel, address, postcode, unit_count, sum_valume, note) values(#{name},#{type},#{pid},#{code},#{propertise}, #{tel}, #{address}, #{postcode},#{unit_count}, #{sum_valume}, #{note})
            else
-             update [group] set name=#{name},pid=#{pid},type=#{type},code=#{code} where id=@id
+             update [group] set name=#{name},pid=#{pid},type=#{type},code=#{code},propertise=#{propertise},tel=#{tel},address=#{address},postcode=#{postcode},unit_count=#{unit_count},sum_valume=#{sum_valume},note=#{note} where id=@id
        end
-     else
-       begin
-          select @id=id from [unit] where id=#{id}
-          if @id is null
-             insert into [unit](name,pid,type,code) values(#{name},#{pid},#{type},#{code})
-          else
-             update [unit] set name=#{name},pid=#{pid},type=#{type},code=#{code} where id=@id
-       end;
   </select>
+  
+  
+  <select id="saveUnit" resultType="map">
+     declare @id int
+    begin
+         select @id=#{unit.id}
+           if @id is null
+             insert into [unit](name, full_name,type, pid, code,putdate,add_valume,state,rated_power,absorb_grid_voltage) 
+             values(#{unit.name},#{unit.full_name},#{unit.type},#{unit.pid},#{unit.code},#{unit.putdate}, #{unit.add_valume}, #{unit.state},#{unit.rated_power}, #{unit.absorb_grid_voltage})
+           else
+             update [unit] set name=#{unit.name},full_name=#{unit.full_name},pid=#{unit.pid},type=#{unit.type},code=#{unit.code},putdate=#{unit.putdate},add_valume=#{unit.add_valume},state=#{unit.state},rated_power=#{unit.rated_power},absorb_grid_voltage=#{unit.absorb_grid_voltage} where id=@id
+       end
+  </select>
+  
   <!-- 保存指标 -->
   <select id="saveIndex" resultType="map">
     declare @id int
-    select @id=#{id}
-    if @id is null
-             insert into [index](name,code) values(#{name},#{code})
-           else
-             update [index] set name=#{name},code=#{code} where id=@id
+     select @id=#{id}
+     if @id is null
+         insert into [index](name,code,unit,note) values(#{name},#{code},#{unit},#{note})
+     else
+         update [index] set name=#{name},code=#{code},unit=#{unit},note=#{note} where id=@id
   </select>
-  <select id="delJtDcJz" resultType="map">
+  <select id="delJtDc" resultType="map">
       declare @type int
         set @type=#{type}
        if @type = 1
@@ -99,10 +134,11 @@
            delete from [group] where id=#{id}
            delete from [unit] where pid=#{id}
          end
-       else if @type = 3
-         begin
-           delete from [unit] where id=#{id}
-         end
+       
+  </select>
+  <!-- 删除机组 -->
+  <select id="delUnit" resultType="map">
+    delete from [unit] where id=#{id}
   </select>
   <!-- 删除指标 -->
   <select id="delIndex" resultType="map">

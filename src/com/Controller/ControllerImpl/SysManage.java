@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Service.SysManageService;
+import com.entity.Unit;
 
 @Controller
 @RequestMapping("SysManage")
@@ -21,29 +22,22 @@ public class SysManage {
 	
    @Resource(name="SysManageService")
    SysManageService SysManageService;
-   
-//电厂树
-@RequestMapping("/findTree")
-@ResponseBody
-public List<Map> findTree(){
-	List<Map> tree=SysManageService.findTree();
-	return tree;
-  }
-//电厂机组树
-@RequestMapping("/findUnitTree")
-@ResponseBody
-public List<Map> findUnitTree(){
-	List<Map> tree=SysManageService.findUnitTree();
-	return tree;
-  }
 
-@RequestMapping("/findJtDcJz")
+
+@RequestMapping("/findJtDc")
 @ResponseBody
-public List<Map> findJtDcJz(String name,Integer id,Integer type,Integer pid){
-	List<Map> list=SysManageService.findJtDcJz(name, id, type, pid);
+public List<Map> findJtDc(String name,Integer id,Integer type,Integer pid){
+	List<Map> list=SysManageService.findJtDc(name, id, type, pid);
 	return list;
 }
- 
+
+@RequestMapping("/findUnits")
+@ResponseBody
+public List<Map> findUnits(Integer pid){
+	List<Map> list=SysManageService.findUnits(pid);
+	return list;
+}
+
 @RequestMapping("/findIndex")
 @ResponseBody
 public List<Map> findIndex(String name){
@@ -51,22 +45,43 @@ public List<Map> findIndex(String name){
 	return result;
  }
 
-@RequestMapping("/saveJtDcJz")
+@RequestMapping("/findTags")
 @ResponseBody
-public void saveJtDcJz(String name,Integer id,Integer type,Integer pid,String code){
-	SysManageService.saveJtDcJz(name, id, type, pid, code);
+public List<Map> findTags(String name,Integer unit_id,Integer group_id,Integer type){
+	List<Map> result=SysManageService.findTags(name, unit_id,group_id,type);
+	return result;
+ }
+
+@RequestMapping("/saveJtDc")
+@ResponseBody
+public void saveJtDc(String name,Integer id,Integer type,Integer pid,String code,String propertise,String tel,String address,String postcode,
+		Integer unit_count,Integer sum_valume,String note){
+	SysManageService.saveJtDc(name, id, type, pid, code,propertise,tel,address,postcode,unit_count,sum_valume,note);
 }
 @RequestMapping("/saveIndex")
 @ResponseBody
-public void saveIndex(Integer id,String name,String code){
-	SysManageService.saveIndex(id,name,code);
+public void saveIndex(Integer id,String name,String code,String unit,String note){
+	SysManageService.saveIndex(id,name,code,unit,note);
 }
 
-@RequestMapping("/delJtDcJz")
+@RequestMapping("/saveUnit")
 @ResponseBody
-public void delJtDcJz(Integer id, String type) {
+public void saveUnit(Unit unit){
+	SysManageService.saveUnit(unit);
+}
+
+@RequestMapping("/delJtDc")
+@ResponseBody
+public void delJtDc(Integer id, String type) {
 	// TODO Auto-generated method stub
-	SysManageService.delJtDcJz(id, type);
+	SysManageService.delJtDc(id, type);
+}
+
+@RequestMapping("/delUnit")
+@ResponseBody
+public void delUnit(Integer id) {
+	// TODO Auto-generated method stub
+	SysManageService.delUnit(id);
 }
 
 @RequestMapping("/delIndex")

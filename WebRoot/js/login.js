@@ -36,9 +36,12 @@ $(function(){
 						$('#menu2',parent.document).show();
 					}else if(data['role']['leval']=='2'){
 						$('#menu1',parent.document).show();
+					}else if(data['role']['leval']=='3'){
+//						alert("角色验证失败");
+//						alert($('#role_leval',parent.document).val());
+						location.reload();
 					}else{
-						alert("角色验证失败");
-						alert($('#role_leval',parent.document).val());
+						$.messager.alert('提示','角色验证失败！');
 						location.reload();
 					}
 				

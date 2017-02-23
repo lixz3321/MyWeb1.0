@@ -72,6 +72,11 @@ $(function(){
 	   $('#dg').datagrid('endEdit', lastEditIndex);//需结束编辑，新数据才会保存到行中
 	   var row=$('#dg').datagrid('getSelections')[0];
 	  // var row=encodeURI(JSON.stringify(row));//对象转为json字符串     （可以直接修改ajax的发送参数格式为‘String’）
+	   if(row['password'].length<5 || row['password'].length>8){
+		   $.messager.alert('提示','密码请输入5-8位字母或数字！');
+		   $('#dg').datagrid('beginEdit', lastEditIndex);//开启上一次编辑
+		   return;
+	   }
 	   $.ajax({
 		   type:'post',
 		   //暂时不指定dataType，指定后ajax成功后不回调success

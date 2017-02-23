@@ -60,9 +60,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <!-- 修改密码弹出窗 --> 
     <div id="dd">
     <div style="margin:20px 0 0 25px;">
-      原  密  码 ：<input id="v1" class="easyui-validatebox passbox" data-options="required:true,missingMessage:'密码不能为空',validType:'length[6,8]',invalidMessage:'请输入6-8位字母或数字'" /><br>
-      新  密  码 ：<input id="v2" class="easyui-validatebox passbox" data-options="required:true,missingMessage:'密码不能为空',validType:'length[6,8]',invalidMessage:'请输入6-8位字母或数字'" /><br>
-  确认密码：<input id="v3" class="easyui-validatebox passbox" data-options="required:true,missingMessage:'密码不能为空',validType:'length[6,8]',invalidMessage:'请输入6-8位字母或数字'" />    
+      原  密  码 ：<input id="v1" class="easyui-validatebox passbox" data-options="required:true,missingMessage:'密码不能为空',validType:'length[6,8]',invalidMessage:'请输入5-8位字母或数字'" /><br>
+      新  密  码 ：<input id="v2" class="easyui-validatebox passbox" data-options="required:true,missingMessage:'密码不能为空',validType:'length[6,8]',invalidMessage:'请输入5-8位字母或数字'" /><br>
+  确认密码：<input id="v3" class="easyui-validatebox passbox" data-options="required:true,missingMessage:'密码不能为空',validType:'length[6,8]',invalidMessage:'请输入5-8位字母或数字'" />    
      </div>
     </div> 
  </body> 

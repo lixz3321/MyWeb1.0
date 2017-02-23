@@ -44,11 +44,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </li>
         <li>
           <a href="javascript:void(0)" onClick="leftMenuUrl(2)"><i class="i9"></i>
-                                        指标管理
+                                        机组维护
           </a>
         </li>
         <li>
           <a href="javascript:void(0)" onClick="leftMenuUrl(3)"><i class="i9"></i>
+                                        指标管理
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onClick="leftMenuUrl(4)"><i class="i9"></i>
                                         测点配置
           </a>
         </li>
@@ -58,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
     <!-- 框架 -->
   <div class="content">
-   <iframe id="small_iframe" class="small_iframe" name="small_iframe" src="jsp/dcManage.jsp" width="83%" height="100%" scrolling="no" frameborder="0"></iframe>
+   <iframe id="small_iframe" class="small_iframe" name="small_iframe" src="jsp/sysManage/dcManage.jsp" width="83%" height="100%" scrolling="no" frameborder="0"></iframe>
   </div>
   </body>
 </html>

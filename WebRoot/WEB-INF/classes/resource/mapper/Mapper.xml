@@ -8,7 +8,16 @@
       <result property="name" column="name"/>
       <result property="age" column="age"/>
     </resultMap> -->
-     
+    
+     <!-- 电厂机组树 -->
+  <select id="findAllJtDc" resultType="map">
+     select * from [group];
+  </select>
+  <select id="findAllJtDcJz" resultType="map">
+    select id,name,pid,type,code from [group] where 1=1
+      UNION All
+    select id,name,pid,type,code from [unit] where 1=1
+  </select>
      
      
       <!-- 测试 -->

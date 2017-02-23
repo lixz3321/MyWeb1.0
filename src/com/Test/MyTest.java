@@ -23,7 +23,7 @@ public class MyTest {
 		ApplicationContext context=new ClassPathXmlApplicationContext("resource/spring-mybatis.xml");
 		SysManageServImpl service=(com.Service.ServiceImpl.SysManageServImpl) context.getBean("SysManageService");	
         
-		List<Map> tree=service.findTree();
-		System.out.println(tree);
+//		List<Map> tree=service.findTree();
+//		System.out.println(tree);
 	}
 }
