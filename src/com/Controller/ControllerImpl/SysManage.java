@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Service.SysManageService;
+import com.entity.Tage;
 import com.entity.Unit;
 
 @Controller
@@ -70,6 +71,12 @@ public void saveUnit(Unit unit){
 	SysManageService.saveUnit(unit);
 }
 
+@RequestMapping("/saveTage")
+@ResponseBody
+public void saveTage(Tage tage){
+	SysManageService.saveTage(tage);
+}
+
 @RequestMapping("/delJtDc")
 @ResponseBody
 public void delJtDc(Integer id, String type) {
@@ -89,6 +96,13 @@ public void delUnit(Integer id) {
 public void delIndex(Integer id, String type) {
 	// TODO Auto-generated method stub
 	SysManageService.delIndex(id);
+}
+
+@RequestMapping("/delTag")
+@ResponseBody
+public void delTag(Tage tage) {
+	// TODO Auto-generated method stub
+	SysManageService.delTag(tage);
 }
 
 

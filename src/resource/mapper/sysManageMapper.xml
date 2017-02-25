@@ -29,55 +29,30 @@
   
   <!-- 测点查询 -->
   <select id="findTags" resultType="map">
-  
-  <!-- 电厂测点 -->
-  <if test="type == 2">
-    select t.name,t.code,t.unit,t.maxval,t.minval,t.createtime,tiu.id tiu_id,t.type
-    from tags t,[group] g,[index] i,tag_index_unit tiu
-    where t.id=tiu.tag_id and i.id=tiu.index_id and  g.id=tiu.group_id 
-     <if test="group_id!=null and group_id!=''">
-      and group_id=${group_id}
-     </if>
-     <if test="name!=null and name != ''">
-      and name like '%${name}%' 
-     </if>
-  </if>
-  <!-- 机组测点 -->
-  <if test="type == 3">
-    select u.name,t.name,t.code,t.unit,t.maxval,t.minval,t.createtime,tiu.id tiu_id,t.type
-    from tags t,unit u,[index] i,tag_index_unit tiu
-    where t.id=tiu.tag_id and i.id=tiu.index_id and u.id=tiu.unit_id 
-    <if test="unit_id!=null and unit_id!=''">
-      and unit_id=${unit_id}
-     </if>
-     <if test="name!=null and name != ''">
-      and name like '%${name}%' 
-     </if>
-  </if>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-   <!--  select * from [tags] where 1=1
-     <if test="name!=null and name != ''">
-      and name like '%${name}%' 
-     </if>
+    <!-- 电厂测点 -->
+    <if test="type == 2">
+      select t.id id,t.type type,tiu.id tiu_id,i.id index_id,g.id dc_id,t.name,t.code,t.unit,t.maxval,t.minval,t.createtime,t.type
+      from tags t,[group] g,[index] i,tag_index_unit tiu
+      where t.id=tiu.tag_id and i.id=tiu.index_id and  g.id=tiu.group_id 
+       <if test="group_id!=null and group_id!=''">
+        and group_id=${group_id}
+       </if>
+       <if test="name!=null and name != ''">
+        and name like '%${name}%' 
+      </if>
+    </if>
+    <!-- 机组测点 -->
+    <if test="type == 3">
+      select t.id id,t.type type,tiu.id tiu_id,i.id index_id,u.id jz_id,t.name,t.code,t.unit,t.maxval,t.minval,t.createtime,t.type
+      from tags t,unit u,[index] i,tag_index_unit tiu
+      where t.id=tiu.tag_id and i.id=tiu.index_id and u.id=tiu.unit_id 
      <if test="unit_id!=null and unit_id!=''">
-      and unit_id=${unit_id}
+       and unit_id=${unit_id}
      </if>
-     <if test="group_id!=null and group_id!=''">
-      and group_id=${group_id}
+     <if test="name!=null and name != ''">
+      and name like '%${name}%' 
      </if>
-     <if test="type!=null and type!=''">
-      and type=${type}
-     </if> -->
+   </if>
   </select>
   
   <!-- 查询指标 -->
@@ -121,6 +96,47 @@
      else
          update [index] set name=#{name},code=#{code},unit=#{unit},note=#{note} where id=@id
   </select>
+  <!-- 保存测点 -->
+  <select id="saveTage" resultType="map">
+     <!-- 保存电厂测点 -->
+     <if test="tage.type == 2">
+          declare @id int
+         begin
+           select @id=id from [tags] where id=#{tage.id}
+           if @id is null
+             begin
+               insert into [tags](name,type,code,unit,minval,maxval,note,createtime) values(#{tage.name},#{tage.type},#{tage.code},#{tage.unit},#{tage.minval},#{tage.maxval},#{tage.note},GETDATE())
+               select top 1 @id=id from [tags] order by createtime desc
+               insert into [tag_index_unit](tag_id,index_id,group_id) values(@id,#{tage.index_id},#{tage.dc_id})
+             end
+           else
+             begin
+               update [tags] set name=#{tage.name},type=#{tage.type},code=#{tage.code},unit=#{tage.unit},minval=#{tage.minval},maxval=#{tage.maxval},note=#{tage.note},createtime=GETDATE() where id=@id
+               update [tag_index_unit] set index_id = #{tage.index_id} where tag_id=@id
+             end 
+         end
+     </if>
+     <!-- 保存机组测点 -->
+     <if test="tage.type == 3">
+          declare @id int
+         begin
+           select @id=id from [tags] where id=#{tage.id}
+           if @id is null
+             begin
+               insert into [tags](name,type,code,unit,minval,maxval,note,createtime) values(#{tage.name},#{tage.type},#{tage.code},#{tage.unit},#{tage.minval},#{tage.maxval},#{tage.note},GETDATE())
+               select top 1 @id=id from [tags] order by createtime desc
+               insert into [tag_index_unit](tag_id,index_id,unit_id) values(@id,#{tage.index_id},#{tage.jz_id})
+             end
+           else
+             begin
+               update [tags] set name=#{tage.name},type=#{tage.type},code=#{tage.code},unit=#{tage.unit},minval=#{tage.minval},maxval=#{tage.maxval},note=#{tage.note},createtime=GETDATE() where id=@id
+               update [tag_index_unit] set index_id = #{tage.index_id} where tag_id=@id
+             end 
+         end     
+     </if>
+  </select>
+  
+  
   <select id="delJtDc" resultType="map">
       declare @type int
         set @type=#{type}
@@ -144,5 +160,11 @@
   <select id="delIndex" resultType="map">
     delete from [index] where id=#{id}
   </select>
-  
+  <!-- 删除测点 -->
+  <select id="delTag" resultType="map">
+    begin
+      delete from [tags] where id=#{tage.id}
+      delete from [tag_index_unit] where id=#{tage.tiu_id}
+    end
+  </select>
 </mapper>

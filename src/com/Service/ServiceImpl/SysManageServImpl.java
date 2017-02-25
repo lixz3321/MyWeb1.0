@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.Dao.Mapper;
 import com.Dao.SysManageMapper;
 import com.Service.SysManageService;
+import com.entity.Tage;
 import com.entity.Unit;
 import com.util.DateUtil;
 import com.util.TreeUtil;
@@ -80,6 +81,11 @@ public void saveIndex(Integer id,String name,String code,String unit,String note
 	sysManageMapper.saveIndex(id,name,code,unit,note);
 }
 
+public void saveTage(Tage tage) {
+	// TODO Auto-generated method stub
+	sysManageMapper.saveTage(tage);
+}
+
 public void delUnit(Integer id) {
 	// TODO Auto-generated method stub
 	sysManageMapper.delUnit(id);
@@ -93,6 +99,11 @@ public void delIndex(Integer id) {
 public void delJtDc(Integer id, String type) {
 	// TODO Auto-generated method stub
 	sysManageMapper.delJtDc(id, type);
+}
+
+public void delTag(Tage tage) {
+	// TODO Auto-generated method stub
+	sysManageMapper.delTag(tage);
 }
 
 

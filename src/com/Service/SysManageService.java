@@ -3,6 +3,8 @@ package com.Service;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
+
+import com.entity.Tage;
 import com.entity.Unit;
 
 public interface SysManageService {
@@ -13,9 +15,11 @@ public interface SysManageService {
 	public void saveJtDc(String name,Integer id,Integer type,Integer pid,String code,String propertise,String tel,String address,String postcode,
 			Integer unit_count,Integer sun_valume,String note);
 	public void saveUnit(Unit unit);
+	public void saveTage(Tage tage);
+	public void saveIndex(Integer id,String name,String code,String unit,String note);
 	public void delJtDc(Integer id,String type);
 	public void delUnit(Integer id);
-	public void saveIndex(Integer id,String name,String code,String unit,String note);
 	public void delIndex(Integer id);
+	public void delTag(Tage tage);
 	
 }
