@@ -12,7 +12,6 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
       <!-- 扫描包 -->                                                                          	
 	 <context:component-scan base-package="com"/> 
-	
 	 <!-- 启用spring mvc 注解     提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，
 	   @Valid支持，读写XML的支持（JAXB），读写JSON的支持（需要引入Jackson系列jar包）-->  
     <mvc:annotation-driven>   
@@ -25,7 +24,10 @@
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean><!-- 表示将请求的URL和Bean名字映射 -->
     
     <!-- 组件2：HandlerAdapter -->
-    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean><!-- 表示实现了该接口的Bean可以作为SpringMVC的处理器 -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter">
+    
+    
+    </bean><!-- 表示实现了该接口的Bean可以作为SpringMVC的处理器 -->
     
     <!-- 组件3：ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -43,5 +45,8 @@
             </list>  
         </property>  
     </bean>  -->
-    
+    <!-- 上传文件拦截，设置最大上传文件大小   10M=10*1024*1024(B)=10485760 bytes -->  
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+    <property name="maxUploadSize" value="10485760" />  
+</bean>
 </beans>

@@ -44,7 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="inputDiv">
                单 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 位：<input id="jt_name" value="">  
                机 &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; 组：<input id="jz_name"/>
-              额定功率范围: <input id="pworMin" type="text" class="power"/>-<input id="pworMax" type="text" class="power"/>    
+       计算时间范围: <input class="easyui-datetimebox power" id="startTime"    
+        data-options="showSeconds:false">-<input class="easyui-datetimebox power" id="endTime"    
+        data-options="showSeconds:false">
+               <!-- <input id="pworMin" type="text" class="power"/>-<input id="pworMax" type="text" class="power"/> -->   
     </div>
     <div class="inputDiv">
                  并 网 状 态：<input id="gridStatus"/>
@@ -52,8 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  励磁投入状态: <input id="lcInput" style="width:205px;"/>
                  <a id="sertch" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a> 
     </div>
-            
-    
      
     </div> 
     <div data-options="region:'center'" style="padding:0px;">
