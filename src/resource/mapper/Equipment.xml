@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Dao.EquipmentMapper">
+  <select id="getEquipmentMsg" resultType="map">
+    select * from equipment where unit_id=#{unit_id}
+  </select>
+  <select id="save">
+    insert into equipment(unit_id,glgk,qjgk,kzxt,qtsb) values(#{unit_id},#{glgk},#{qjgk},#{kzxt},#{qtsb});
+  </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Dao.PssMapper">
+  <select id="findJtOrJz" resultType="map">
+     <!--查找集团  -->
+     <if test="type==1">
+       select * from [group] where type = 1
+     </if>
+     <!--查找集团下机组 -->
+     <if test="type==3">
+       select ((select name from [group] where id= unit.pid)+unit.name+'机组') name,unit.id,type 
+       from unit 
+       where pid in(
+            select g2.id from [group] g1,[group] g2 where g2.pid=g1.id and g1.id = #{id} and g1.type=1
+           )
+     </if>
+  </select>
+  <!-- pss数据查询 (行转列)-->
+  <select id="getPssData" resultType="map">
+     select s.*,g.name+u.name+'机组' name from
+      
+ (select  p1.time time,p1.unit_id,p1.[value] edgl,p2.[value] yggl,p3.[value] bwzt,p4.[value] bwdy,p5.[value] psst,p6.[value] lctr 
+ from 
+  (select p.*,tiu.index_id,tiu.unit_id unit_id from pss p,tag_index_unit tiu where p.tag_id = tiu.tag_id and index_id=19) p1,
+  (select p.*,tiu.index_id,tiu.unit_id unit_id from pss p,tag_index_unit tiu where p.tag_id = tiu.tag_id and index_id=5) p2,
+  (select p.*,tiu.index_id ,tiu.unit_id unit_id from pss p,tag_index_unit tiu where p.tag_id = tiu.tag_id and index_id=20) p3,
+  (select p.*,tiu.index_id ,tiu.unit_id unit_id from pss p,tag_index_unit tiu where p.tag_id = tiu.tag_id and index_id=23) p4,
+  (select p.*,tiu.index_id ,tiu.unit_id unit_id from pss p,tag_index_unit tiu where p.tag_id = tiu.tag_id and index_id=21) p5,
+  (select p.*,tiu.index_id ,tiu.unit_id unit_id from pss p,tag_index_unit tiu where p.tag_id = tiu.tag_id and index_id=22) p6 
+ where p1.[time]= p2.[time] and p1.unit_id=p2.unit_id
+  and p2.[time]= p3.[time] and p2.unit_id=p3.unit_id
+  and p3.[time]= p4.[time] and p3.unit_id=p4.unit_id
+  and p4.[time]= p5.[time] and p4.unit_id=p5.unit_id
+  and p5.[time]= p6.[time]  and p5.unit_id=p6.unit_id) s,unit u,[group] g
+
+where s.unit_id = u.id and u.pid = g.id
+<if test="unit_id != null and unit_id!=''">
+ and s.unit_id = #{unit_id}
+</if>
+<if test="startTime != null and startTime!=''">
+ and s.time &gt;= #{startTime}  
+</if>
+<if test="endTime != null and endTime!=''">
+ and s.time &lt;= #{endTime}
+</if>
+<if test="bwzt != null and bwzt!=''">
+ and s.bwzt = ${bwzt}
+</if>
+<if test="psst != null and psst!=''">
+ and s.psst = ${psst}
+</if>
+
+<if test="lctr != null and lctr!=''">
+ and s.lctr = ${lctr}
+</if>
+ 
+  </select>
+</mapper>

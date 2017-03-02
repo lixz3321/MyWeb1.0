@@ -1,0 +1,20 @@
+ <div id="win" class="easyui-window" title="请选择指标" style="width:800px;height:400px;"  
+        data-options="iconCls:'icon-save',modal:true,closed:true">  
+     <div class="easyui-layout" data-options="fit:true">
+	  	<div data-options="region:'north',border:false" style="height:70px;" >
+	  		<div class="border-01">
+	  	     	<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" id="Isearch_btn">查询</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-redo',plain:true" id="Ireset">重置</a>
+			</div>
+			<div style="margin:8px 8px 8px 5px">
+			  	指标名称： <input class="easyui-textbox" id="Isearch_name" style="width:150px" data-options="iconCls:'icon-search'"> 
+			  	指标编码： <input class="easyui-textbox" id="Isearch_code" style="width:150px" data-options="iconCls:'icon-search'">
+			</div>
+		 </div>
+		
+		 <!-- 数据表格 -->
+		 <div data-options="region:'center'">
+			<table id="Igrid" data-options="fit:true"></table>
+		 </div>
+		</div>
+ </div> 
