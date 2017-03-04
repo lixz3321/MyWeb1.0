@@ -19,6 +19,10 @@ import com.entity.Unit;
 
 @Controller
 @RequestMapping("SysManage")
+/**
+ * @author lixz
+ *
+ */
 public class SysManage {
 	
    @Resource(name="SysManageService")

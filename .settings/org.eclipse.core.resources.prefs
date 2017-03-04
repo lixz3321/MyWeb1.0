@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebRoot/css/main.css=UTF-8
+encoding//WebRoot/js/PollWarn.js=UTF-8
 encoding//WebRoot/js/common.js=UTF-8
 encoding//WebRoot/js/equipment.js=UTF-8
 encoding//WebRoot/js/pss.js=UTF-8
@@ -12,6 +13,7 @@ encoding//WebRoot/js/sysManage/ss=UTF-8
 encoding//WebRoot/js/sysManage/tagManage.js=UTF-8
 encoding//WebRoot/js/sysManage/unitManage.js=UTF-8
 encoding//WebRoot/js/userManager.js=UTF-8
+encoding//WebRoot/jsp/PollWarn.jsp=UTF-8
 encoding//WebRoot/jsp/dataCont.jsp=UTF-8
 encoding//WebRoot/jsp/equipment.jsp=UTF-8
 encoding//WebRoot/jsp/login.jsp=UTF-8

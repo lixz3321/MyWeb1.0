@@ -50,8 +50,8 @@ $(function(){
 		    	    	$('#dc_name').val(node['text']);
 		    	    	$('#dc_id').val(node['id']);
 		    	    	//清空机组信息
-		    	    	$('#jz_name').val();
-		    	    	$('#jz_id').val();
+		    	    	$('#jz_name').val('');
+		    	    	$('#jz_id').val('');
 		    	    }else if($type==3){
 		    	    	var parentNode=$('#tt').tree('getParent',node.target);//父节点
 		    	    	$('#dc_name').val(parentNode['text']);

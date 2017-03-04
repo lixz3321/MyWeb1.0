@@ -14,6 +14,10 @@ import com.Service.PssService;
 
 @Controller
 @RequestMapping("/Pss")
+/**
+ * @author lixz
+ *
+ */
 public class Pss {
    
 	@Resource(name="PssServiceImpl")

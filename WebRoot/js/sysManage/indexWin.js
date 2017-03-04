@@ -10,7 +10,7 @@ function loadWin(index){
 		singleSelect : true,
 		striped:true,
 		method : 'post',
-		onDblClickRow:function(){        
+		onDblClickRow:function(){       
 			var data=$('#Igrid').datagrid('getSelected');
 			$.messager.confirm('确认','您确认选择该指标吗？',function(r){ 
 //				组合测点

@@ -35,12 +35,12 @@ $(function(){
 		if($(this)[0]==$li[0]){    //需将this转为js对象
 		   $('#iframe').attr('src','jsp/dataCont.jsp');
 		}else if($(this)[0]==$li[1]){
-		   $('#iframe').attr('src','jsp/discharge.jsp');
+		   $('#iframe').attr('src','jsp/PollWarn.jsp');
 		 //把该页面的url存入会话，以便刷新重定向
 		   $.ajax({
 				type:'post',
 				url:'Common/addUrl2Session',
-				data:{crrent_iframe_url:'jsp/discharge.jsp'},
+				data:{crrent_iframe_url:'jsp/PollWarn.jsp'},
 			});
 		}else if($(this)[0]==$li[2]){
 		   $('#iframe').attr('src','jsp/pss.jsp');

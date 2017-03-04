@@ -23,6 +23,10 @@ import com.entity.sys_User;
 
 @Controller
 @RequestMapping("/PermManage")
+/**
+ * @author lixz
+ *
+ */
 public class PermManage {
 	
 	@Resource(name="PermManageService")

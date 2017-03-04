@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Dao.PollWarnMapper">
+ <select id="getChartData" resultType="map">
+  select top 5 g.name dc_name,p.[value] from tag_index_unit tiu,[group] g,pollwarn p,tags t,[index] i
+  where tiu.tag_id = p.tag_id 
+  and tiu.group_id = g.id 
+  and tiu.tag_id =  t.id
+  and t.type=2
+  and tiu.index_id=i.id
+  and tiu.index_id =#{index_id}
+  order by value desc
+ </select>
+ <select id="getGrid" resultType="map">
+--------  行转列 ----------
+select s1.jt_id,s1.dc_id,s1.unit_id jz_id,s1.jt_name,s1.dc_name,s1.jz_name,s1.power,s1.maxval maxeyhl,s1.[value] eyhl,s2.maxval maxdyhw,s2.[value] dyhw,s3.maxval maxycnd,s3.[value] ycnd,s1.[time] time
+from (select  g1.id jt_id,g2.id dc_id,u.id unit_id,t.id tag_id,g1.name jt_name,g2.name dc_name,u.name jz_name,u.rated_power power,i.name index_name,t.minval minval,p.[value],t.maxval-10 maxval,p.time 
+from tag_index_unit tiu,[group] g2,[group] g1,unit u,pollwarn p,tags t,[index] i
+where tiu.tag_id = p.tag_id 
+and tiu.unit_id = u.id 
+and tiu.tag_id =  t.id
+and tiu.index_id=i.id
+and g1.type=1
+and g2.type=2
+and g2.id=u.pid
+and g2.pid=g1.id
+and t.type=3
+and tiu.index_id =13) s1, (select  g1.id jt_id,g2.id dc_id,u.id unit_id,t.id tag_id,g1.name jt_name,g2.name dc_name,u.name jz_name,u.rated_power power,i.name index_name,t.minval minval,p.[value],t.maxval-10 maxval,p.time 
+from tag_index_unit tiu,[group] g2,[group] g1,unit u,pollwarn p,tags t,[index] i
+where tiu.tag_id = p.tag_id 
+and tiu.unit_id = u.id 
+and tiu.tag_id =  t.id
+and tiu.index_id=i.id
+and g1.type=1
+and g2.type=2
+and g2.id=u.pid
+and g2.pid=g1.id
+and t.type=3
+and tiu.index_id =14) s2,(select  g1.id jt_id,g2.id dc_id,u.id unit_id,t.id tag_id,g1.name jt_name,g2.name dc_name,u.name jz_name,u.rated_power power,i.name index_name,t.minval minval,p.[value],t.maxval-10 maxval,p.time 
+from tag_index_unit tiu,[group] g2,[group] g1,unit u,pollwarn p,tags t,[index] i
+where tiu.tag_id = p.tag_id 
+and tiu.unit_id = u.id 
+and tiu.tag_id =  t.id
+and tiu.index_id=i.id
+and g1.type=1
+and g2.type=2
+and g2.id=u.pid
+and g2.pid=g1.id
+and t.type=3
+and tiu.index_id =15) s3
+where
+s1.unit_id = s2.unit_id
+and s2.unit_id=s3.unit_id
+and s1.[time]=s2.[time]
+and s2.[time]=s3.[time]
+
+<if test="jt_id!=null and jt_id!=''">
+ and s1.jt_id=#{jt_id}
+</if>
+<if test="dc_id!=null and dc_id!=''">
+ and s1.dc_id=#{dc_id}
+</if>
+<if test="jz_id!=null and jz_id!=''">
+ and s1.unit_id=#{jz_id}
+</if>
+ </select>
+</mapper>

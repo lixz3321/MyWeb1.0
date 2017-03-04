@@ -1,0 +1,18 @@
+.chartDiv{
+	margin:20px;
+	padding-top:10px;
+	background-color:#fff;
+	width:380px;
+	margin:0;
+	float:left;
+}
+.chartTit{
+	color:#000;
+	font-size:13px;
+	font-weith:300;
+	padding:15px;
+}
+#jzList{
+	font-size:13px;
+	font-weith:200;
+}

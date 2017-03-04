@@ -28,6 +28,10 @@ import net.sf.json.util.JSONUtils;
 
 @Controller
 @RequestMapping("/Login")
+/**
+ * @author lixz
+ *
+ */
 public class login {
 	 @Resource
 	 LoginService LoginService;
@@ -36,10 +40,8 @@ public class login {
 	 @RequestMapping("/login")
 	 @ResponseBody
 	 public Map<String,Object> login(String name,String pass,HttpSession session) throws Exception{
-			
 		 System.out.println("controller    name:"+name+"  pass:"+pass);
 		 Map<String,Object> map=LoginService.validate(name,pass,session);
-		 
 	return map;	 
  }
 	 

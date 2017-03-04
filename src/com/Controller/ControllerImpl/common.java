@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Service.CommonService;
 import com.Service.PermManageService;
+/**
+ * @author lixz
+ *
+ */
 @Controller
 @RequestMapping("/Common")
 public class common {

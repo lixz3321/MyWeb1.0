@@ -27,7 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Service.EquipmentService;
-
+/**
+ * @author lixz
+ *
+ */
 @Controller
 @RequestMapping("/Equipment")
 public class Equipment {

@@ -16,6 +16,10 @@ import com.Service.service;
 import com.entity.User;
 import com.entity.sys_User;
 
+/**
+ * @author lixz
+ *
+ */
 @Controller
 @RequestMapping("/Controller")
 public class controller{
