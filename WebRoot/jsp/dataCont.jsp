@@ -16,16 +16,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<!-- 公共 -->
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="web-resource/jquery-easyui/jquery.min.js"></script> 
+	<!-- easyUI -->
 	<link rel="stylesheet" type="text/css" href="web-resource/jquery-easyui/themes/default/easyui.css">  
     <link rel="stylesheet" type="text/css" href="web-resource/jquery-easyui/themes/icon.css"> 
-    <script src="web-resource/jquery-easyui/jquery.min.js"></script> 
     <script type="text/javascript" src="web-resource/jquery-easyui/jquery.easyui.min.js"></script>
-    
-    <script src="js/dataCont.js"></script>  
+    <!-- amchart -->
+    <link rel="stylesheet" href="web-resource/amcharts/style.css"	type="text/css">
+    <script src="web-resource/amcharts/amcharts.js"></script>
+    <script src="web-resource/amcharts/serial.js"></script>
+    <script src="web-resource/amcharts/amstock.js"></script>
+	<!-- 本模块 -->
+    <script src="js/dataCont.js"></script>
+    <script>
+
+			
+		</script>  
   </head>
   
   <body>
+  <!-- Chart -->
+
   <input id="sys_name"type="hidden" value='${user.name}'><!-- 存放会话中的用户 -->
-    This is  数据统计 用户：${user.name} page. <br>
+    <div id="chartdiv" style="width:100%; height:600px;"></div>
   </body>
 </html>
